@@ -103,6 +103,7 @@ async function deleteAccount() {
         console.log(response);
         alert(response.data.mensaje);
         if (response.data.mensaje == "Usuario eliminado") {
+            localStorage.removeItem("token");
             window.location.href = "./";
         }else{
             alert(response.data.mensaje);
