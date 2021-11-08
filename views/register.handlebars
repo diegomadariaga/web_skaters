@@ -1,0 +1,44 @@
+<body><br>
+    <h1>Skate Park</h1>
+
+    <div class="py-4">
+        <h2>Registro</h2>
+        <hr class="w-50" />
+
+        <form id="formulario" action="/skater" method="POST" enctype="multipart/form-data">
+            <div class="form-group row w-50 m-auto">
+                <div class="form-group col-12 col-sm-6">
+                    <label>Email</label>
+                    <input id="txtEmail" class="form-control m-auto" type="email" name="email" />
+                </div>
+                <div class="form-group col-12 col-sm-6">
+                    <label>Nombre</label>
+                    <input id="txtNombre" class="form-control m-auto" type="text" name="nombre" />
+                </div>
+                <div class="form-group col-12 col-sm-6">
+                    <label>Password</label>
+                    <input id="txtPassword" class="form-control m-auto" type="password" name="password" />
+                </div>
+                <div class="form-group col-12 col-sm-6">
+                    <label>Repita la password</label>
+                    <input id="txtPassword2" class="form-control m-auto" type="password" name="password2" />
+                </div>
+                <div class="form-group col-12 col-sm-6">
+                    <label>Años de experiencia</label>
+                    <input id="txtExp" class="form-control m-auto" type="number" name="anos_experiencia" />
+                </div>
+                <div class="form-group col-12 col-sm-6">
+                    <label>Especialidad</label>
+                    <input id="txtEsp" class="form-control m-auto" type="text" name="especialidad" />
+                </div>
+                <div class="form-group col-12 col-sm-12">
+                    <label>Foto de perfil</label>
+                    <input id="archivo" type="file" name="foto" />
+                </div>
+            </div>
+            <input id="btnRegistrar" class="btn btn-info mb-3" type="submit" value="Registrarme" />
+
+            <p><a href="/iniciar">Iniciar sesión</a></p>
+        </form>
+    </div>
+</body>
