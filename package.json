@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon app.js",
     "build": "tsc -p ./ -w",
-    "test":  "ts-node app.ts"
+    "test": "ts-node app.ts"
   },
   "keywords": [],
   "author": "",
@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
-    "@types/node": "^16.11.1",
+    "@types/node": "^16.11.6",
     "@types/pg": "^8.6.1",
     "ts-node": "^10.3.0"
   }

@@ -1,11 +1,10 @@
 //import express, { Application, Request, Response,  } from "express";
 const express = require("express");
-const { Application, Request, Response } = require("express");
+//const { Application, Request, Response } = require("express");
 //import path from "path";
 const path = require("path");
-
-
-import rutas from "./routes/rutas";
+//import rutas from "./routes/rutas";
+const rutas = require("./routes/rutas");
 const exphbs = require("express-handlebars");
 
 
@@ -43,7 +42,7 @@ app.set("view engine", "handlebars");
 //params = /:algo
 
 
-//rutas handlebar_________________________________________________________________________
+//rutas handlebars_________________________________________________________________________
 app.get("/", rutas); 
 app.get("/iniciar", rutas); 
 app.get("/modificar_perfil", rutas);
@@ -51,6 +50,7 @@ app.get("/registrar_skater", rutas);
 app.get("/admin/:token", rutas);
 //validate user and provide token
 app.post("/validate", rutas);
+
 //routes api rest
 app.post("/skater", rutas);
 app.patch("/skater", rutas);
@@ -59,15 +59,7 @@ app.put("/skater", rutas );
 //route delete user profile
 app.delete("/skater", rutas);
 
-/* app.get("/skaters", async (req: Request, res: Response) => {
-    try {
-        let filas = await conexion.getSkaters();
-        res.status(201).send(filas);
-    } catch (e) {
-        console.log(e);
-        res.status(500).send(e);
-    }
-}); */
+
 
 
 

@@ -1,21 +1,17 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-//import express, { Application, Request, Response,  } from "express";
 const express = require("express");
-const { Application, Request, Response } = require("express");
-//import path from "path";
 const path = require("path");
-const rutas_1 = __importDefault(require("./routes/rutas"));
+const rutas = require("./routes/rutas");
 const exphbs = require("express-handlebars");
 const expressFileUpload = require("express-fileupload");
+
 const port = 3000;
 const app = express();
+
 app.listen(port, () => console.log(`iniciado puerto 3000 http://localhost:${port}/`));
+
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
 app.use(expressFileUpload({
     // se define que el límite para la carga de imágenes es de 5MB
     limits: { fileSize: 5000000 },
@@ -23,39 +19,39 @@ app.use(expressFileUpload({
     //se responde con un mensaje indicando que se sobrepasó el límite especificado
     responseOnLimit: "El peso del archivo que intentas subir supera el limite permitido",
 }));
+
+//se disponibiliza la carpeta public para que se pueda acceder desde la web
 app.use(express.static(__dirname + "/public/"));
 app.engine("handlebars", exphbs({
     defaultLayout: "main",
     layoutsDir: path.join(__dirname, "/views/mainLayout"),
     partialsDir: path.join(__dirname, "/views/Componentes"),
 }));
+
+//se establece el motor de plantillas
 app.set("view engine", "handlebars");
-//querystring = ?=
-//params = /:algo
-//rutas handlebar_________________________________________________________________________
-app.get("/", rutas_1.default);
-app.get("/iniciar", rutas_1.default);
-app.get("/modificar_perfil", rutas_1.default);
-app.get("/registrar_skater", rutas_1.default);
-app.get("/admin/:token", rutas_1.default);
-//validate user and provide token
-app.post("/validate", rutas_1.default);
-//routes api rest
-app.post("/skater", rutas_1.default);
-app.patch("/skater", rutas_1.default);
-//route update user profile
-app.put("/skater", rutas_1.default);
-//route delete user profile
-app.delete("/skater", rutas_1.default);
-/* app.get("/skaters", async (req: Request, res: Response) => {
-    try {
-        let filas = await conexion.getSkaters();
-        res.status(201).send(filas);
-    } catch (e) {
-        console.log(e);
-        res.status(500).send(e);
-    }
-}); */
+
+//rutas handlebars_________________________________________________________________________
+app.get("/", rutas);
+app.get("/iniciar", rutas);
+app.get("/modificar_perfil", rutas);
+app.get("/registrar_skater", rutas);
+app.get("/admin/:token", rutas);
+
+//provee el token para el usuario
+app.post("/validate", rutas);
+
+
+//routes api rest_____________________________________________________________________
+app.post("/skater", rutas);
+//actualiza estado del skater
+app.patch("/skater", rutas);
+//actualiza datos del skater
+app.put("/skater", rutas);
+//elimina skater
+app.delete("/skater", rutas);
+
+
 //default route_________________________________________________________________________
 app.get("*", (req, res) => {
     try {

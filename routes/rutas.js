@@ -1,23 +1,25 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
-const indexController_1 = require("../controllers/indexController");
-//const {idxController} = require("../controllers/indexController");
-const router = express_1.default.Router();
-const rutasProtegidas = express_1.default.Router();
-rutasProtegidas.use(indexController_1.idxController.verifyToken);
-router.get("/", indexController_1.idxController.loadRoot);
-router.get("/iniciar", indexController_1.idxController.getLoginView);
-router.get("/registrar_skater", indexController_1.idxController.getRegisterView);
-router.get("/modificar_perfil", indexController_1.idxController.getModifView);
-//router.get("/admin", idxController.getAdminView);
-router.get("/admin/:token", indexController_1.idxController.getAdminView);
-router.post("/validate", indexController_1.idxController.getToken);
-router.post("/skater", indexController_1.idxController.createSkater);
-router.put("/skater", rutasProtegidas, indexController_1.idxController.updateSkater);
-router.patch("/skater", rutasProtegidas, indexController_1.idxController.updateSkaterEstado);
-router.delete("/skater", rutasProtegidas, indexController_1.idxController.deleteSkater);
-exports.default = router;
+//import express, { Router} from "express";
+const express = require('express');
+//import {idxController} from "../controllers/indexController";
+const { idxController } = require("../controllers/indexController");
+
+const router = express.Router();
+
+const rutasProtegidas = express.Router();
+//middleware para proteger las rutas con token
+rutasProtegidas.use(idxController.verifyToken);
+
+//rutas
+router.get("/", idxController.loadRoot);
+router.get("/iniciar", idxController.getLoginView);
+router.get("/registrar_skater", idxController.getRegisterView);
+router.get("/modificar_perfil", idxController.getModifView);
+router.get("/admin/:token", idxController.getAdminView);
+router.post("/validate", idxController.getToken);
+router.post("/skater", idxController.createSkater);
+
+//rutas protegidas
+router.put("/skater", rutasProtegidas, idxController.updateSkater);
+router.patch("/skater", rutasProtegidas, idxController.updateSkaterEstado);
+router.delete("/skater", rutasProtegidas, idxController.deleteSkater);
+module.exports = router;

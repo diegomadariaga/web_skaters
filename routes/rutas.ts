@@ -1,10 +1,12 @@
-import express, { Router} from "express";
-import {idxController} from "../controllers/indexController";
-//const {idxController} = require("../controllers/indexController");
+//import express, { Router} from "express";
+const express = require('express');
+
+//import {idxController} from "../controllers/indexController";
+const {idxController} = require("../controllers/indexController");
 
 
-const router: Router = express.Router();
-const rutasProtegidas: Router = express.Router();
+const router: any = express.Router();
+const rutasProtegidas: any = express.Router();
 rutasProtegidas.use(idxController.verifyToken); 
 
 router.get("/", idxController.loadRoot);
