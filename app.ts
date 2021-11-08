@@ -48,7 +48,7 @@ app.get("/", rutas);
 app.get("/iniciar", rutas); 
 app.get("/modificar_perfil", rutas);
 app.get("/registrar_skater", rutas);
-app.get("/admin", rutas);
+app.get("/admin/:token", rutas);
 //validate user and provide token
 app.post("/validate", rutas);
 //routes api rest

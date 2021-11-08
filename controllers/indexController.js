@@ -52,15 +52,55 @@ class indexController {
             });
         }
     }
-    async getAdminView(req, res) {
+    /* public async getAdminView (req: Request, res: Response): Promise<void> {
         try {
             let filas = await conexion.getSkaters();
             res.render("admin", { filas: filas });
-        }
-        catch (e) {
+        } catch (e) {
             console.log(e);
             res.render("aviso", {
                 mensaje: "no se pudo cargar el listado de participantes 💔",
+            });
+        }
+    } */
+    async getAdminView(req, res) {
+        const { token } = req.params;
+        if (token == "1") {
+            res.render("aviso", {
+                mensaje: "debe iniciar sesion para acceder a la administracion",
+            });
+        }
+        console.log(token);
+        // decode token
+        if (token) {
+            // verifica el token y su expiración
+            jwt.verify(token, secretKey, async function (err, decoded) {
+                if (err) {
+                    console.log("error de autenticacion del token: ", err);
+                    res.render("aviso", {
+                        mensaje: "su sesion expiro, debe iniciar sesion nuevamente",
+                    });
+                }
+                else {
+                    // si el token es válido, obtiene los datos del usuario
+                    try {
+                        let filas = await conexion.getSkaters();
+                        res.render("admin", { filas: filas });
+                    }
+                    catch (e) {
+                        console.log(e);
+                        res.render("aviso", {
+                            mensaje: "no se pudo cargar el listado de participantes 💔",
+                        });
+                    }
+                }
+            });
+        }
+        else {
+            // si no hay token, retorna error
+            console.log("no hay token");
+            res.render("aviso", {
+                mensaje: "debe iniciar sesion para acceder",
             });
         }
     }

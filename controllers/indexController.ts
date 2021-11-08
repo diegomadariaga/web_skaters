@@ -49,7 +49,7 @@ class indexController {
             });
         }
     }
-    public async getAdminView (req: Request, res: Response): Promise<void> {
+    /* public async getAdminView (req: Request, res: Response): Promise<void> {
         try {
             let filas = await conexion.getSkaters();
             res.render("admin", { filas: filas });
@@ -59,6 +59,47 @@ class indexController {
                 mensaje: "no se pudo cargar el listado de participantes 💔",
             });
         }
+    } */
+    public async getAdminView (req: Request, res: Response): Promise<void> {
+        const { token } = req.params;
+        if (token=="1") {
+            
+            res.render("aviso", {
+                mensaje: "debe iniciar sesion para acceder a la administracion",
+            });
+        }
+        console.log(token);
+        // decode token
+        if (token) {
+            // verifica el token y su expiración
+            jwt.verify(token, secretKey, async function (err: any, decoded: any) {
+                if (err) {
+                    console.log("error de autenticacion del token: ", err);
+                    res.render("aviso", {
+                        mensaje: "su sesion expiro, debe iniciar sesion nuevamente",
+                    });
+                } else {
+                    // si el token es válido, obtiene los datos del usuario
+                    try {
+                        let filas = await conexion.getSkaters();
+                        res.render("admin", { filas: filas });
+                    } catch (e) {
+                        console.log(e);
+                        res.render("aviso", {
+                            mensaje: "no se pudo cargar el listado de participantes 💔",
+                        });
+                    }
+                }
+            });
+        } else {
+            // si no hay token, retorna error
+            console.log("no hay token");
+            res.render("aviso", {
+                mensaje: "debe iniciar sesion para acceder",
+            });
+        }
+
+        
     }
     public async getToken (req: Request, res: Response) {
         let { email, password } = req.body;

@@ -15,7 +15,7 @@
     </head>
     {{! navbar bootstrap }}
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="./">SkatePark</a>
+        <a class="navbar-brand" href="http://localhost:3000/">SkatePark</a>
         <button
             class="navbar-toggler"
             type="button"
@@ -34,25 +34,21 @@
                     <a class="nav-link" href="/iniciar">modificar mi perfil<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin">administración</a>
+                    <a id="btn_admin" class="nav-link" href="/admin/1">administración</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/registrar_skater">crear nuevo usuario</a>
                 </li>
                 
             </ul>
-            <button onclick="salir()" class="btn btn-outline-danger my-2 my-sm-0" type="">salir</button>
+            <button id="btn_salir" onclick="salir()" class="btn btn-outline-danger my-2 my-sm-0" type="">salir</button>
             
         </div>
     </nav>
     {{! navbar bootstrap }}
 
     {{{body}}}
-    <script>        
-        function salir(){
-            localStorage.removeItem("token");
-            window.location.href = "/";
-        }
-    </script> 
+
+    <script src="/js/index.js"></script>
 
 </html>

@@ -11,7 +11,8 @@ router.get("/", idxController.loadRoot);
 router.get("/iniciar", idxController.getLoginView);
 router.get("/registrar_skater", idxController.getRegisterView);
 router.get("/modificar_perfil", idxController.getModifView);
-router.get("/admin", idxController.getAdminView);
+//router.get("/admin", idxController.getAdminView);
+router.get("/admin/:token", idxController.getAdminView);
 router.post("/validate", idxController.getToken);
 router.post("/skater", idxController.createSkater);
 
