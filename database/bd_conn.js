@@ -10,20 +10,22 @@ async function hashPassword(password) {
     return hash;
 }
 class Conexion {
-    constructor() { }
-    #config = {
-        user: "afpbhcayvlrcli",
-        host: "ec2-54-147-126-173.compute-1.amazonaws.com",
-        password: "bd15401f71d6604d868e89b683bb1ce224f36f2ad575b1f50017dd7da852b6aa",
-        database: "d23r8b43jtedkr",
-        port: 5432,
-        ssl: {
-            rejectUnauthorized: false,
-        },
-        max: 4,
-        idleTimeoutMillis: 5000,
-        connectionTimeoutMillis: 2000,
-    };
+    constructor() {
+        this.#config = {
+            user: "user",
+            host: "www.amazonaws.com",
+            password: "123",
+            database: "db_",
+            port: 5432,
+            ssl: {
+                rejectUnauthorized: false,
+            },
+            max: 4,
+            idleTimeoutMillis: 5000,
+            connectionTimeoutMillis: 2000,
+        };
+    }
+    #config;
     #pool;
     async #conectar() {
         try {
